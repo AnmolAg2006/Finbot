@@ -1,11 +1,15 @@
 'use client';
 
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import InputField from '@/components/forms/InputField';
 import FooterLink from '@/components/forms/FooterLink';
+import { useRouter } from 'next/navigation';
+import { signInWithEmail } from '@/lib/actions/auth.actions';
+import { toast } from 'sonner';
 
 const SignIn = () => {
+    const router = useRouter();
     const {
         register,
         handleSubmit,
@@ -18,13 +22,19 @@ const SignIn = () => {
         mode: 'onBlur',
     });
 
-    const onSubmit = async (data: SignInFormData) => {
-        try {
-            console.log('Sign in', data);
-        } catch (e) {
-            console.error(e);
-        }
-    };
+  const onSubmit: SubmitHandler<SignInFormData> = async (data) => {
+    try { 
+        // signipWithEmail
+        const result = await signInWithEmail(data);
+        if(result.success) router.push('/');
+    }
+    catch (error) {
+        console.error('Error during sign in:', error);
+        toast.error('Sign ip Failed' , {
+          description : error instanceof Error ? error.message : "Failed to create an account "
+        })
+    }
+  }
 
     return (
         <>

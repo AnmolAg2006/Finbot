@@ -8,9 +8,12 @@ import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import {CountrySelectField} from '@/components/forms/CountrySelectField'
 import FooterLink from '@/components/forms/FooterLink'
-
+import { signUpWithEmail } from '@/lib/actions/auth.actions'
+import { useRouter } from 'next/navigation'
+import { toast } from 'sonner'
 
 const SignUp = () => {
+  const router = useRouter();
     const {
     register,
     handleSubmit,
@@ -30,10 +33,15 @@ const SignUp = () => {
   })
   const onSubmit: SubmitHandler<SignUpFormData> = async (data) => {
     try { 
-        console.log( data);
+        // signupWithEmail
+        const result = await signUpWithEmail(data);
+        if(result.success) router.push('/');
     }
     catch (error) {
         console.error('Error during sign up:', error);
+        toast.error('Sign up Failed' , {
+          description : error instanceof Error ? error.message : "Failed to create an account "
+        })
     }
   }
 
