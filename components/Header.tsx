@@ -14,9 +14,9 @@ const Header = async ({ user }: { user: User }) => {
           <Image
             src="/assets/icons/logo.svg"
             alt="Signalist logo"
-            width={140}
-            height={32}
-            className="h-8 w-auto cursor-pointer"
+            width={200}
+            height={40}
+            className="h-13 w-auto cursor-pointer"
           />
         </Link>
         <nav className="hidden sm:block">

@@ -1,20 +1,65 @@
-<svg width="250" height="70" viewBox="0 0 250 70" xmlns="http://www.w3.org/2000/svg">
+<svg width="320" height="80" viewBox="0 0 320 80" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="tealGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#14b8a6; stop-opacity:1" /> <stop offset="100%" style="stop-color:#0d9488; stop-opacity:1" /> </linearGradient>
-    <style>
-      .finbot-text-secure { font-family: 'Montserrat', 'Verdana', sans-serif; font-size: 38px; font-weight: 600; fill: #334155; } /* Slate Gray */
-    </style>
+    <!-- Gradient for icon -->
+    <linearGradient id="finbot-icon-gradient" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#34D0FF"/>
+      <stop offset="100%" stop-color="#2563EB"/>
+    </linearGradient>
+
+    <!-- Gradient for text -->
+    <linearGradient id="finbot-text-gradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F9FAFB"/>
+      <stop offset="100%" stop-color="#A5B4FC"/>
+    </linearGradient>
+
+    <!-- Soft shadow / pseudo 3D -->
+    <filter id="finbot-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.45" />
+    </filter>
+
+    <!-- Inner glow for icon -->
+    <filter id="finbot-inner-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="1.5" result="blur"/>
+      <feColorMatrix in="blur" type="matrix"
+        values="0 0 0 0 0
+                0 0 0 0 0.8
+                0 0 0 0 1
+                0 0 0 0.8 0" result="glow"/>
+      <feBlend in="SourceGraphic" in2="glow" mode="screen"/>
+    </filter>
   </defs>
 
-  <g transform="translate(10, 10)">
-    <circle cx="25" cy="25" r="25" fill="url(#tealGradient)"/>
-    
-    <g fill="#ffffff">
-      <path d="M18 18 h-5 v5 h-5 v-10 h10 z"/>
-      <path d="M32 18 h5 v5 h5 v-10 h-10 z"/>
-    </g>
+  <!-- Robot icon background circle -->
+  <g filter="url(#finbot-shadow)">
+    <circle cx="48" cy="40" r="22" fill="url(#finbot-icon-gradient)" />
   </g>
 
-  <text x="75" y="45" class="finbot-text-secure">finbot</text>
+  <!-- Robot "antenna" -->
+  <g filter="url(#finbot-inner-glow)">
+    <circle cx="38" cy="20" r="3.2" fill="#E0F2FE"/>
+    <circle cx="58" cy="20" r="3.2" fill="#E0F2FE"/>
+    <rect x="37" y="22" width="2.5" height="6" rx="1.25" fill="#E0F2FE"/>
+    <rect x="57" y="22" width="2.5" height="6" rx="1.25" fill="#E0F2FE"/>
+
+    <!-- Robot face -->
+    <circle cx="48" cy="40" r="13" fill="rgba(15,23,42,0.35)" />
+    <circle cx="43" cy="37" r="2.4" fill="#E0F2FE"/>
+    <circle cx="53" cy="37" r="2.4" fill="#E0F2FE"/>
+
+    <!-- Smile -->
+    <path d="M42 43C43.2 45.4 45.4 47 48 47C50.6 47 52.8 45.4 54 43"
+      stroke="#E0F2FE" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+
+  <!-- Text: finbot -->
+  <g filter="url(#finbot-shadow)">
+    <text x="82" y="48"
+      fill="url(#finbot-text-gradient)"
+      font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+      font-size="30"
+      font-weight="700"
+      letter-spacing="0.02em">
+      finbot
+    </text>
+  </g>
 </svg>
